@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/graph_utils/config_loader.hpp
+
+../include/graph_utils/graph_class.hpp
+
+../include/graph_utils/graph_element_class.hpp
+
+/home/jens/Schreibtisch/coursera_cpp_kurs/week3/homework/dijkstra_algorithm_project/src/graph_utils/config_loader.cpp
+config_loader.hpp
+/home/jens/Schreibtisch/coursera_cpp_kurs/week3/homework/dijkstra_algorithm_project/src/graph_utils/config_loader.hpp
+
+/home/jens/Schreibtisch/coursera_cpp_kurs/week3/homework/dijkstra_algorithm_project/src/graph_utils/graph_class.cpp
+graph_class.hpp
+/home/jens/Schreibtisch/coursera_cpp_kurs/week3/homework/dijkstra_algorithm_project/src/graph_utils/graph_class.hpp
+
+/home/jens/Schreibtisch/coursera_cpp_kurs/week3/homework/dijkstra_algorithm_project/src/graph_utils/graph_element_class.cpp
+graph_element_class.hpp
+/home/jens/Schreibtisch/coursera_cpp_kurs/week3/homework/dijkstra_algorithm_project/src/graph_utils/graph_element_class.hpp
+

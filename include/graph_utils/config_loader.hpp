@@ -1,0 +1,5 @@
+#ifndef CONFIGLOADER
+#define CONFIGLOADER
+
+
+#endif /* CONFIGLOADER */
