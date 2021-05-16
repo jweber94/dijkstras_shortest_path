@@ -3,21 +3,30 @@
 
 #include "graph_vertex.hpp"
 
+#include <Eigen/Dense>
 #include <stddef.h>
-#include <vector>
-#include <tuple>
-#include <map>
-#include <memory>
 
 class GraphNode {
 public:
-    GraphNode() = default; 
-    GraphNode(const size_t neighbours, const size_t node_idx, const std::vector<std::tuple<size_t, double>> neighbour_idx_weight);
+  // constructors
+  GraphNode() = delete;
+  GraphNode(const size_t num_graph_node,
+            const Eigen::VectorXd &weights_node_vertex);
 
+  // destructors
+  ~GraphNode() = default;
 
-private: 
-    size_t node_idx_;
-    std::map<size_t, std::shared_ptr<GraphVertex>> vertex_reference_;    
+  // member
+  Eigen::VectorXd get_weights() const;
+  double get_min_vertex_weight() const;
+  size_t get_min_vertex_node_idx() const;
+  size_t get_node_number() const;
+
+private:
+  size_t num_node_; // index of the node within the graph
+  Eigen::VectorXd vertex_weights_;
+  double min_vertex_weight_;
+  size_t min_vertex_weight_idx_;
 };
 
 #endif /* GRAPHNODE */

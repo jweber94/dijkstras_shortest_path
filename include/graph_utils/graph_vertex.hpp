@@ -5,10 +5,10 @@
 
 class GraphVertex {
 public:
-    GraphVertex() = default; 
+  GraphVertex() = default;
 
 private:
-    size_t vertex_idx_; 
+  size_t vertex_idx_;
 };
 
 #endif /* GRAPHVERTEX */
