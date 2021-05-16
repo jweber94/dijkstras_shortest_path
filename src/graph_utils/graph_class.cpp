@@ -1,4 +1,5 @@
 #include "graph_class.hpp"
+#include "my_dijkstra.hpp"
 
 #include <iostream>
 #include <time.h>
@@ -15,6 +16,7 @@ UndirectedGraph::UndirectedGraph(const size_t num_nodes,
 
   this->avg_vertex_cost_ = 0;
   this->shortest_path_cost_ = -1;
+  this->dijkstra_run_ = false;
 
   // preallocation
   this->vertex_weights_ =
@@ -24,11 +26,8 @@ UndirectedGraph::UndirectedGraph(const size_t num_nodes,
   this->create_random_graph();
 
   // create graph nodes
-  std::cout << "The random graph matrix is:\n" << this->vertex_weights_ << "\n";
   for (int i = 0; i < this->num_nodes_; i++) {
     Eigen::VectorXd temp_weights = this->vertex_weights_.row(i);
-    std::cout << "temp_weights with index i=" << i << " are: \n"
-              << temp_weights << "\n";
     std::shared_ptr<GraphNode> temp_node =
         std::make_shared<GraphNode>(i, temp_weights);
     this->graph_nodes_.push_back(temp_node);
@@ -99,7 +98,13 @@ void UndirectedGraph::calculate_avg_vertex_weights() {
 }
 
 double UndirectedGraph::get_shortest_path_costs() const {
-  return this->shortest_path_cost_;
+  if (!this->dijkstra_run_) {
+    std::cerr << "could not call get_shortest_path_costs() - please call "
+                 "run_dijkstra() before calling this method.\n";
+    return -1.0;
+  } else {
+    return this->shortest_path_cost_;
+  }
 }
 
 double UndirectedGraph::get_avg_vertex_costs() const {
@@ -107,8 +112,32 @@ double UndirectedGraph::get_avg_vertex_costs() const {
 }
 
 void UndirectedGraph::run_dijkstra() {
-  std::cout << "started dijkstra's algorithm\n";
-  // FIXME
+  DijkstraShortestPath dijkstra_calculator(this->graph_nodes_);
 
-  std::cout << "finished dijkstra's algorithm\n";
+  this->shortest_path_nodes_ = dijkstra_calculator.run_dijkstra();
+  this->shortest_path_cost_ = dijkstra_calculator.get_shortest_path_cost();
+
+  this->dijkstra_run_ = true; // set flag variable to true
+}
+
+std::vector<size_t> UndirectedGraph::get_shortest_path_idxs() const {
+  std::vector<size_t> result_idxs;
+  std::cout << "Size of the shortest path: "
+            << this->shortest_path_nodes_.size() << "\n";
+  for (int i = 0; i < this->shortest_path_nodes_.size(); i++) {
+    result_idxs.push_back(this->shortest_path_nodes_[i]->get_node_number());
+  }
+  return result_idxs;
+}
+
+void UndirectedGraph::print_shortest_path_idxs() const {
+  std::cout << "The shortest path indices are:\n";
+  for (int i = 0; i < this->shortest_path_nodes_.size(); i++) {
+    std::cout << this->shortest_path_nodes_[i]->get_node_number() << "\n";
+  }
+}
+
+void UndirectedGraph::print_weight_matrix() const {
+  std::cout << "The vertex matrix of the graph is:\n"
+            << this->vertex_weights_ << "\n";
 }

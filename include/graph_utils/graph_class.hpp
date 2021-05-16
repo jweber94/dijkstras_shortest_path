@@ -26,6 +26,9 @@ public:
   // methods
   double get_shortest_path_costs() const;
   double get_avg_vertex_costs() const;
+  std::vector<size_t> get_shortest_path_idxs() const;
+  void print_shortest_path_idxs() const;
+  void print_weight_matrix() const;
   void run_dijkstra();
 
 private:
@@ -39,10 +42,12 @@ private:
   double avg_vertex_cost_;
   double shortest_path_cost_;
   size_t num_nodes_;
+  bool dijkstra_run_;
   Eigen::MatrixXd
       vertex_weights_; // every row and column describes a node, the values
                        // within the matrix are the vertex weights
   std::vector<std::shared_ptr<GraphNode>> graph_nodes_;
+  std::vector<std::shared_ptr<GraphNode>> shortest_path_nodes_;
 };
 
 #endif /* GRAPHCLASS */

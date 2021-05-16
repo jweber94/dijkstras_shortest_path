@@ -12,17 +12,9 @@ GraphNode::GraphNode(const size_t num_graph_node,
   Eigen::VectorXd::Index min_node_idx;
   this->min_vertex_weight_ = this->vertex_weights_.minCoeff(&min_node_idx);
   this->min_vertex_weight_idx_ = static_cast<size_t>(min_node_idx);
-  // std::cout << "initialized graph node with index: " << this->num_node_ << "
-  // with the weights:\n" << this->vertex_weights_ << "\n"; // debug
 }
 
-Eigen::VectorXd GraphNode::get_weights() const {
-  std::cout << "The vertex weights of node " << this->num_node_ << " are:\n";
-  for (int i = 0; i < this->vertex_weights_.size(); i++) {
-    std::cout << this->vertex_weights_(i) << "\n";
-  }
-  return this->vertex_weights_;
-}
+Eigen::VectorXd GraphNode::get_weights() const { return this->vertex_weights_; }
 
 double GraphNode::get_min_vertex_weight() const {
   return this->min_vertex_weight_;
@@ -33,3 +25,8 @@ size_t GraphNode::get_min_vertex_node_idx() const {
 }
 
 size_t GraphNode::get_node_number() const { return this->num_node_; }
+
+void GraphNode::print_vertex_weights() const {
+  std::cout << "The vertex weights of node " << this->num_node_ << " are:\n"
+            << this->vertex_weights_ << "\n";
+}

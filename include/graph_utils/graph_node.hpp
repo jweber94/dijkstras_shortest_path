@@ -1,8 +1,6 @@
 #ifndef GRAPHNODE
 #define GRAPHNODE
 
-#include "graph_vertex.hpp"
-
 #include <Eigen/Dense>
 #include <stddef.h>
 
@@ -21,6 +19,7 @@ public:
   double get_min_vertex_weight() const;
   size_t get_min_vertex_node_idx() const;
   size_t get_node_number() const;
+  void print_vertex_weights() const;
 
 private:
   size_t num_node_; // index of the node within the graph
