@@ -26,9 +26,10 @@ int main() {
   try {
     // create objects for the calculation
     ConfigLoader config_loader(config_path);
-    UndirectedGraph random_graph(
-        config_loader.get_num_nodes(), config_loader.get_lower_edge_weight(),
-        config_loader.get_upper_edge_weight(), config_loader.get_edge_prob());
+    UndirectedGraph random_graph(config_loader.get_num_nodes(),
+                                 config_loader.get_lower_edge_weight(),
+                                 config_loader.get_upper_edge_weight(),
+                                 config_loader.get_edge_prob(), 10);
 
     random_graph.print_weight_matrix();
     std::cout << "The average vertex costs are: "

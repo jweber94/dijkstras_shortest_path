@@ -12,8 +12,8 @@ public:
   // constructors
   UndirectedGraph() = delete;
   UndirectedGraph(const size_t num_nodes, const double lower_weight,
-                  const double upper_weight,
-                  const double vertex_prob); // random initialization
+                  const double upper_weight, const double vertex_prob,
+                  const int max_trials); // random initialization
   UndirectedGraph(
       const size_t num_nodes, const double lower_weight,
       const double upper_weight, const double vertex_prob,
@@ -29,6 +29,7 @@ public:
   std::vector<size_t> get_shortest_path_idxs() const;
   void print_shortest_path_idxs() const;
   void print_weight_matrix() const;
+  bool is_connected() const;
   void run_dijkstra();
 
 private:
@@ -42,10 +43,12 @@ private:
   double avg_vertex_cost_;
   double shortest_path_cost_;
   size_t num_nodes_;
+  size_t num_edges_;
   bool dijkstra_run_;
   Eigen::MatrixXd
       vertex_weights_; // every row and column describes a node, the values
                        // within the matrix are the vertex weights
+  Eigen::Matrix<bool, Eigen::Dynamic, Eigen::Dynamic> connection_matrix_;
   std::vector<std::shared_ptr<GraphNode>> graph_nodes_;
   std::vector<std::shared_ptr<GraphNode>> shortest_path_nodes_;
 };

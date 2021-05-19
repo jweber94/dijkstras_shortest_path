@@ -8,23 +8,6 @@ DijkstraShortestPath::DijkstraShortestPath(
   // initialize
   this->shortest_path_cost_ = 0;
   this->input_graph_ = input_graph;
-
-  // check if the graph is connected
-  if (!this->is_connected()) {
-    std::cerr << "The given graph was not connected. Please try again or use "
-                 "another threshold value for the vertex acceptance.\n";
-    throw std::bad_exception();
-  } else {
-    std::cout << "The graph is valid. Dijkstra's algorithm is ready to run.\n";
-  }
-}
-
-bool DijkstraShortestPath::is_connected() const {
-  // FIXME
-  // Check, if the nodes in the graph are connected so that every node could be
-  // reached from an arbitrary start node
-
-  return true;
 }
 
 double DijkstraShortestPath::get_shortest_path_cost() const {
