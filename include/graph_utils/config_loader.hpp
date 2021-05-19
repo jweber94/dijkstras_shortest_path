@@ -14,12 +14,14 @@ public:
   double get_upper_edge_weight() const;
   double get_edge_prob() const;
   size_t get_num_nodes() const;
+  size_t get_num_trials() const;
 
 private:
   size_t num_nodes_;
   double lower_;
   double upper_;
   double edge_prob_;
+  size_t num_trials_;
 };
 
 #endif /* CONFIGLOADER */
