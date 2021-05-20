@@ -1,5 +1,5 @@
-#ifndef GRAPHNODE
-#define GRAPHNODE
+#ifndef GRAPH_NODE
+#define GRAPH_NODE
 
 #include <Eigen/Dense>
 #include <stddef.h>
@@ -28,4 +28,15 @@ private:
   size_t min_vertex_weight_idx_;
 };
 
-#endif /* GRAPHNODE */
+class CompGraphNode {
+public:
+  CompGraphNode() = default;
+
+  int operator()(const GraphNode &node_1, const GraphNode &node_2) {
+    bool result = true;
+    // ToDo: create comparison function for the node order to create a min_heap
+    return result;
+  }
+};
+
+#endif /* GRAPH_NODE */

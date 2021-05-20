@@ -14,7 +14,9 @@ double DijkstraShortestPath::get_shortest_path_cost() const {
   return this->shortest_path_cost_;
 }
 
-std::vector<std::shared_ptr<GraphNode>> DijkstraShortestPath::run_dijkstra() {
+std::vector<std::shared_ptr<GraphNode>>
+DijkstraShortestPath::run_dijkstra(const GraphNode &start_node,
+                                   const GraphNode &end_node) {
   // DEBUG/TEST This is just test code for the data pipeline
   Eigen::VectorXd test_vec(3);
   test_vec << 2.1, 1.1, 5.5;

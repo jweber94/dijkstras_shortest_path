@@ -196,7 +196,11 @@ bool UndirectedGraph::is_connected() const {
 void UndirectedGraph::run_dijkstra() {
   DijkstraShortestPath dijkstra_calculator(this->graph_nodes_);
 
-  this->shortest_path_nodes_ = dijkstra_calculator.run_dijkstra();
+  this->shortest_path_nodes_ = dijkstra_calculator.run_dijkstra(
+      *this->graph_nodes_[0],
+      *this->graph_nodes_[this->num_nodes_]); // We need to dereference the
+                                              // nodes in order to access them
+                                              // by the (smart) pointer
   this->shortest_path_cost_ = dijkstra_calculator.get_shortest_path_cost();
 
   this->dijkstra_run_ = true; // set flag variable to true
