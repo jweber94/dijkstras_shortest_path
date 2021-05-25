@@ -2,10 +2,12 @@
 #include "graph_class.hpp"
 #include "graph_node.hpp"
 #include <Eigen/Dense>
+#include <boost/filesystem.hpp>
+#include <boost/program_options.hpp>
 #include <iostream>
 #include <string>
 
-int main() {
+int main(int argc, char *argv[]) {
   /*
   // DEBUG
   Eigen::VectorXd test_vec(3);
@@ -18,11 +20,35 @@ int main() {
   // DEBUG END
   */
 
-  std::string config_path;
-  std::cout << "Plase insert the path to the configuration file:\n";
-  config_path = "../etc/config.yml"; // debug
-  // std::cin >> config_path;
+  // command line parser
+  boost::program_options::options_description desc{"Options"};
+  boost::program_options::variables_map vm;
+  std::string config_path = "none";
 
+  desc.add_options()("help,h",
+                     "Help and overview of all possible command line options")(
+      "path,p",
+      boost::program_options::value<std::string>()->default_value(
+          "../etc/config.yml"),
+      "Path to the configuration file");
+
+  boost::program_options::store(
+      boost::program_options::parse_command_line(argc, argv, desc), vm);
+  boost::program_options::notify(vm);
+
+  config_path = vm["path"].as<std::string>();
+
+  if (vm.count("help")) {
+    std::cout << desc << "\n";
+    exit(0);
+  }
+  if ((config_path == "none") || !(boost::filesystem::exists(config_path))) {
+    std::cerr << "The path to the config is not valid. Please check your "
+                 "config path after --path /path/to/your/config.yml\n";
+    exit(0);
+  }
+
+  // calculation
   try {
     // create objects for the calculation
     ConfigLoader config_loader(config_path);
