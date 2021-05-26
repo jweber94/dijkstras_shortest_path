@@ -21,30 +21,36 @@ int main(int argc, char *argv[]) {
   */
 
   // command line parser
-  boost::program_options::options_description desc{"Options"};
+  boost::program_options::options_description desc{
+      "Options for the calculation of dijkstras shortest path algorithm"};
   boost::program_options::variables_map vm;
   std::string config_path = "none";
 
-  desc.add_options()("help,h",
-                     "Help and overview of all possible command line options")(
-      "path,p",
-      boost::program_options::value<std::string>()->default_value(
-          "../etc/config.yml"),
-      "Path to the configuration file");
+  try {
+    desc.add_options()(
+        "help,h", "Help and overview of all possible command line options")(
+        "path,p",
+        boost::program_options::value<std::string>()->default_value(
+            "../etc/config.yml"),
+        "Path to the configuration file");
 
-  boost::program_options::store(
-      boost::program_options::parse_command_line(argc, argv, desc), vm);
+    boost::program_options::store(
+        boost::program_options::parse_command_line(argc, argv, desc), vm);
+    boost::program_options::notify(vm);
 
-  config_path = vm["path"].as<std::string>();
+    config_path = vm["path"].as<std::string>();
 
-  if (vm.count("help")) {
-    std::cout << desc << "\n";
-    exit(0);
-  }
-  if ((config_path == "none") || !(boost::filesystem::exists(config_path))) {
-    std::cerr << "The path to the config is not valid. Please check your "
-                 "config path after --path /path/to/your/config.yml\n";
-    exit(0);
+    if (vm.count("help")) {
+      std::cout << desc << "\n";
+      exit(0);
+    }
+    if ((config_path == "none") || !(boost::filesystem::exists(config_path))) {
+      std::cerr << "The path to the config is not valid. Please check your "
+                   "config path after --path /path/to/your/config.yml\n";
+      exit(0);
+    }
+  } catch (const boost::program_options::error &ex) {
+    std::cerr << ex.what() << "\n";
   }
 
   // calculation
