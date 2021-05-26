@@ -34,7 +34,6 @@ int main(int argc, char *argv[]) {
 
   boost::program_options::store(
       boost::program_options::parse_command_line(argc, argv, desc), vm);
-  boost::program_options::notify(vm);
 
   config_path = vm["path"].as<std::string>();
 
