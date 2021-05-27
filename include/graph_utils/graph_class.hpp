@@ -30,12 +30,13 @@ public:
   void print_shortest_path_idxs() const;
   void print_weight_matrix() const;
   bool is_connected() const;
-  void run_dijkstra();
+  void find_path(const int & start_idx, const int & finish_idx);
 
 private:
   void create_random_graph();
   void create_graph_based_on_file();
   void calculate_avg_vertex_weights();
+  bool valid_start_end_nodes(const int & start_node_idx, const int & end_node_idx); 
 
   double lower_vertex_weight_;
   double upper_vertex_weight_;

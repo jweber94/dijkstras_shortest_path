@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <map>
 
 DijkstraShortestPath::DijkstraShortestPath(
     std::vector<std::shared_ptr<GraphNode>> input_graph) {
@@ -15,21 +16,47 @@ double DijkstraShortestPath::get_shortest_path_cost() const {
 }
 
 std::vector<std::shared_ptr<GraphNode>>
-DijkstraShortestPath::run_dijkstra(const GraphNode &start_node,
-                                   const GraphNode &end_node) {
-  // DEBUG/TEST This is just test code for the data pipeline
-  Eigen::VectorXd test_vec(3);
-  test_vec << 2.1, 1.1, 5.5;
-  std::shared_ptr<GraphNode> temp_node =
-      std::make_shared<GraphNode>(2, test_vec);
-  std::vector<std::shared_ptr<GraphNode>> result;
-  result.push_back(temp_node);
+DijkstraShortestPath::run_dijkstra(const int &start_node,
+                                   const int &end_node) {
+  /*
+  // test/debug
+  std::cout << "Start node: " << this->input_graph_[start_node]->get_node_number() << ", with the weights:\n" << this->input_graph_[start_node]->get_weights() << "\n"; 
+  std::cout << "End node: " << this->input_graph_[end_node]->get_node_number() << ", with the weights:\n" << this->input_graph_[end_node]->get_weights() << "\n";
+  */
 
-  // FIXME: run the calculation of dijkstras algorithm
-  // TODO
+  std::vector<std::shared_ptr<GraphNode> > result_nodes;
+  std::priority_queue<std::pair<int, double>, std::vector<std::pair<int, double> >, CompOpenSet>
+      open_set;
+  std::vector<int> closed_set_idxs;
+  Eigen::VectorXd temp_weights(this->input_graph_.size()); 
+
+  closed_set_idxs.push_back(start_node);
+  temp_weights = this->input_graph_[start_node]->get_weights(); 
+  
+  while (!(std::count(closed_set_idxs.begin(), closed_set_idxs.end(), end_node)))
+  {
+    for (int i = 0; i < this->input_graph_.size(); i++){
+      // look throu all neighbors of a node and check if the current distance in the open set is less then a new one from the node
+       
+    }
+
+
+
+
+
+
+
+    closed_set_idxs.push_back(end_node); 
+    // as long as the end node is not contained within the closed set --> Do the iteration
+    
+  }
+  
+
 
   // setting the costs for the calculated shortest path
   this->shortest_path_cost_ = -1.0; // FIXME
 
-  return result;
+  // create/copy the nodes to the result vector
+
+  return result_nodes;
 }

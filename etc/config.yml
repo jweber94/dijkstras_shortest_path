@@ -3,3 +3,5 @@ edge_prob_thresh: 0.9
 min_weight_edge: 1.0
 max_weight_edge: 10.0
 num_random_trials: 10
+start_idx: 0
+finish_idx: 4
