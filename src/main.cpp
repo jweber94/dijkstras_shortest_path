@@ -67,7 +67,8 @@ int main(int argc, char *argv[]) {
               << random_graph.get_avg_vertex_costs() << "\n";
 
     std::cout << "Calculation of Dijkstras Algorithm started\n";
-    random_graph.find_path(config_loader.get_start_node_idx(), config_loader.get_finish_node_idx());
+    random_graph.find_path(config_loader.get_start_node_idx(),
+                           config_loader.get_finish_node_idx());
 
     random_graph.print_shortest_path_idxs();
     std::cout << "Finished program.\n";

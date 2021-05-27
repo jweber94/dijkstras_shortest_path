@@ -193,16 +193,17 @@ bool UndirectedGraph::is_connected() const {
   }
 }
 
-void UndirectedGraph::find_path(const int & start_idx, const int & finish_idx) {
+void UndirectedGraph::find_path(const int &start_idx, const int &finish_idx) {
   DijkstraShortestPath dijkstra_calculator(this->graph_nodes_);
-  
-  if (! this->valid_start_end_nodes(start_idx, finish_idx)){
-    std::cerr << "No valid start or finish node was given!\n"; 
-    throw std::logic_error("No valid start nodes were given!") ; 
+
+  if (!this->valid_start_end_nodes(start_idx, finish_idx)) {
+    std::cerr << "No valid start or finish node was given!\n";
+    throw std::logic_error("No valid start nodes were given!");
     exit(0);
   }
 
-  this->shortest_path_nodes_ = dijkstra_calculator.run_dijkstra(start_idx, finish_idx); 
+  this->shortest_path_nodes_ =
+      dijkstra_calculator.run_dijkstra(start_idx, finish_idx);
 
   this->shortest_path_cost_ = dijkstra_calculator.get_shortest_path_cost();
 
@@ -231,6 +232,8 @@ void UndirectedGraph::print_weight_matrix() const {
             << this->vertex_weights_ << "\n";
 }
 
-bool UndirectedGraph::valid_start_end_nodes(const int & start_node_idx, const int & end_node_idx){
-  return ((start_node_idx >= 0) && (start_node_idx < this->num_nodes_ -1) && (end_node_idx > start_node_idx) && (end_node_idx < this->num_nodes_)); 
+bool UndirectedGraph::valid_start_end_nodes(const int &start_node_idx,
+                                            const int &end_node_idx) {
+  return ((start_node_idx >= 0) && (start_node_idx < this->num_nodes_ - 1) &&
+          (end_node_idx > start_node_idx) && (end_node_idx < this->num_nodes_));
 }

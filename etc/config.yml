@@ -1,5 +1,5 @@
 num_nodes: 5
-edge_prob_thresh: 0.9
+edge_prob_thresh: 0.4
 min_weight_edge: 1.0
 max_weight_edge: 10.0
 num_random_trials: 10

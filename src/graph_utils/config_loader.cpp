@@ -10,8 +10,8 @@ ConfigLoader::ConfigLoader(const std::string &input_path) {
   this->lower_ = yaml_reader["min_weight_edge"].as<double>();
   this->upper_ = yaml_reader["max_weight_edge"].as<double>();
   this->edge_prob_ = yaml_reader["edge_prob_thresh"].as<double>();
-  this->start_idx_ = yaml_reader["start_idx"].as<int>(); 
-  this->finish_idx_ = yaml_reader["finish_idx"].as<int>(); 
+  this->start_idx_ = yaml_reader["start_idx"].as<int>();
+  this->finish_idx_ = yaml_reader["finish_idx"].as<int>();
 }
 
 // Test functiontions DONE
