@@ -206,6 +206,8 @@ void UndirectedGraph::find_path(const int &start_idx, const int &finish_idx) {
       dijkstra_calculator.run_dijkstra(start_idx, finish_idx);
 
   this->shortest_path_cost_ = dijkstra_calculator.get_shortest_path_cost();
+  this->shortest_path_idxs_ = dijkstra_calculator.get_shortest_path_idxs(); 
+  //dijkstra_calculator.print_shortest_path(); 
 
   this->dijkstra_run_ = true; // set flag variable to true
 }
@@ -225,6 +227,7 @@ void UndirectedGraph::print_shortest_path_idxs() const {
   for (int i = 0; i < this->shortest_path_nodes_.size(); i++) {
     std::cout << this->shortest_path_nodes_[i]->get_node_number() << "\n";
   }
+  std::cout << "with the cost of: " << this->shortest_path_cost_ << "\n";
 }
 
 void UndirectedGraph::print_weight_matrix() const {

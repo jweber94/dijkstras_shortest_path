@@ -53,6 +53,7 @@ private:
   Eigen::Matrix<bool, Eigen::Dynamic, Eigen::Dynamic> connection_matrix_;
   std::vector<std::shared_ptr<GraphNode>> graph_nodes_;
   std::vector<std::shared_ptr<GraphNode>> shortest_path_nodes_;
+  std::vector<int> shortest_path_idxs_; 
 };
 
 #endif /* GRAPHCLASS */

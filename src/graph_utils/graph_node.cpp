@@ -7,6 +7,8 @@ GraphNode::GraphNode(const size_t num_graph_node,
   // init node attributes
   this->num_node_ = num_graph_node;
   this->vertex_weights_ = weights_node_vertex;
+  this->last_cummulated_weight_ = 0; 
+  this->predecessor_node_ = -1; 
 
   // calculate remaining node attributes
   Eigen::VectorXd::Index min_node_idx;
