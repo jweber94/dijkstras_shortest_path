@@ -11,7 +11,7 @@ RUN apt-get update && \
 WORKDIR /dijkstra_dir
 
 # install yaml-cpp
-RUN git clone <FIXME>
+RUN git clone https://github.com/jweber94/dijkstras_shortest_path.git
 WORKDIR /dijkstra_dir/yaml-cpp/build
 RUN cmake -DYAML_BUILD_SHARED_LIBS=ON ..
 RUN make -j12
