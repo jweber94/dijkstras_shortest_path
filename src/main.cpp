@@ -8,17 +8,6 @@
 #include <string>
 
 int main(int argc, char *argv[]) {
-  /*
-  // DEBUG
-  Eigen::VectorXd test_vec(3);
-  test_vec << 2.1, 1.1, 5.5;
-  GraphNode test_node(2, test_vec);
-  test_node.get_weights();
-  std::cout << "min idx: " << test_node.get_min_vertex_node_idx() << "\n";
-  std::cout << "min weight val: " << test_node.get_min_vertex_weight() << "\n";
-  test_node.print_vertex_weights();
-  // DEBUG END
-  */
 
   // command line parser
   boost::program_options::options_description desc{

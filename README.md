@@ -6,7 +6,7 @@ After a valid graph is generated, dijkstras algorithm will be applied to it and 
 
 ## CAUTION: Not finished yet! ToDos:
 
-- [ ] Finalize the Dockerfile and Readme in first version
+- [ x ] Finalize the Dockerfile and Readme in first version
 - [ ] Find the bug in dijkstras algorithm: Sometimes there is an index error and sometimes a memory access error!
 - [ ] Think about and implement a visualization of the graph with its shortest path from start to finish (probably in python)
 - [ ] Load a given graph from a csv file and calculate the shortest path 
@@ -27,7 +27,7 @@ Then, go into the cloned folder
 To make the code run on all machines/OS, I created a _Dockerfile_ for building a Docker Image/Container to run the code within an Ubuntu 18.04 emulation.
 In order to make it run, you have to build the docker (this might take a while, depending on your internet connection and hardware):
 
-    $ docker build -t "proj:dijkstra" .
+    $ docker build -t proj:dijkstra .
 
 Then you can start the docker container with a terminal:
 
@@ -43,4 +43,18 @@ Go into the folder and start the executable with
     # cd ./build
     # ./run_dijkstra
 
-You can execute it and hand it a configuration file with the ```--path /path/to/your/config.yml```. You can find a reference for the structure in the folder ```/etc```. You can choose one of them by giving them the relative path. (eg. ```../etc/config.yml```) Then the execution will start and the results will be printed to the terminal. 
+You can execute it and hand it a configuration file with the ```--path /path/to/your/config.yml```. You can find a reference for the structure in the folder ```/etc```, eg. ```--path ../etc/config.yml```) Then the execution will start and the results will be printed to the terminal. 
+
+## Explaination of the configuration file
+
++ ```num_nodes```: Number of nodes within the randomly generated graph
++ ```edge_prob_thresh```: Probability that an edge between two nodes will be accepted during the random graph generation
++ ```min_weight_edge```: Minimum weight of an edge between two nodes within the randomly generated graph
++ ```max_weight_edge```: Maximum weight of an edge between two nodes within the randomly generated graph
++ ```num_random_trials```: Number of trials for generating a fully connected random graph. After this number of trials, the program execution will be terminated
++ ```start_idx```: Start node-index for dijkstras shortest path search
++ ```finish_idx```: End node-index for dijkstras shortest path search - The highest index you can choose is 1 - ```num_nodes```, since the first node in the graph get the index 0. 
+
+## Requirements
+
+The project is meant to be docker based. You can see the requirements to run it on your local machine in the Dockerfile. It should be possible with a Ubuntu 18.04 LTS installation with yaml-cpp, libboost-all-dev and Eigen3 installed. 

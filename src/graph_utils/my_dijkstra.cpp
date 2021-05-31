@@ -1,9 +1,9 @@
 #include "my_dijkstra.hpp"
 
+#include <algorithm>
 #include <iostream>
 #include <map>
 #include <stdexcept>
-#include <algorithm>
 
 DijkstraShortestPath::DijkstraShortestPath(
     std::vector<std::shared_ptr<GraphNode>> input_graph) {
@@ -88,57 +88,65 @@ DijkstraShortestPath::run_dijkstra(const int &start_node, const int &end_node) {
   }
 
   // get the shortest path information
-  this->shortest_path_cost_ = this->input_graph_[end_node]->get_last_cummulated_weight(); 
-  this->traverse_shortest_path(start_node, end_node); // creates the this->shortest_path_sequence_ 
-  this->temp_start_idx_ = start_node; 
-  this->temp_end_idx_ = end_node; 
+  this->shortest_path_cost_ =
+      this->input_graph_[end_node]->get_last_cummulated_weight();
+  this->traverse_shortest_path(
+      start_node, end_node); // creates the this->shortest_path_sequence_
+  this->temp_start_idx_ = start_node;
+  this->temp_end_idx_ = end_node;
 
   return this->shortest_path_sequence_;
 }
 
-void DijkstraShortestPath::traverse_shortest_path(const int & start, const int & end) {
-  std::cout << "Traverse the path.\n"; 
-  bool finished = false; 
-  int next_idx; 
-  int temp_next_idx; 
+void DijkstraShortestPath::traverse_shortest_path(const int &start,
+                                                  const int &end) {
+  std::cout << "Traverse the path.\n";
+  bool finished = false;
+  int next_idx;
+  int temp_next_idx;
 
-  this->shortest_path_idxs_.push_back(this->input_graph_[end]->get_node_number()); 
+  this->shortest_path_idxs_.push_back(
+      this->input_graph_[end]->get_node_number());
   this->shortest_path_sequence_.push_back(this->input_graph_[end]);
 
-  next_idx = this->input_graph_[end]->get_predecessor_node(); 
+  next_idx = this->input_graph_[end]->get_predecessor_node();
 
-  while ( next_idx != start )
-  {
-    std::cout << "next_idx is: " << next_idx << "\n"; 
-    this->shortest_path_idxs_.push_back(this->input_graph_[next_idx]->get_node_number()); 
+  while (next_idx != start) {
+    std::cout << "next_idx is: " << next_idx << "\n";
+    this->shortest_path_idxs_.push_back(
+        this->input_graph_[next_idx]->get_node_number());
     this->shortest_path_sequence_.push_back(this->input_graph_[next_idx]);
 
     temp_next_idx = this->input_graph_[next_idx]->get_predecessor_node();
-    //debug
-    if (next_idx == temp_next_idx){
-      std::cerr << "Something went wrong\n"; 
-      exit(0); 
+    // debug
+    if (next_idx == temp_next_idx) {
+      std::cerr << "Something went wrong\n";
+      exit(0);
     }
-    next_idx = temp_next_idx; 
-
-  }  
+    next_idx = temp_next_idx;
+  }
   // add the start node after finishing traversing back
-  this->shortest_path_idxs_.push_back(this->input_graph_[next_idx]->get_node_number()); 
+  this->shortest_path_idxs_.push_back(
+      this->input_graph_[next_idx]->get_node_number());
   this->shortest_path_sequence_.push_back(this->input_graph_[next_idx]);
 
   // invert the vectors to start from the start node and end with the end node
-  std::reverse(this->shortest_path_idxs_.begin(), this->shortest_path_idxs_.end());
-  std::reverse(this->shortest_path_sequence_.begin(), this->shortest_path_sequence_.end());    
+  std::reverse(this->shortest_path_idxs_.begin(),
+               this->shortest_path_idxs_.end());
+  std::reverse(this->shortest_path_sequence_.begin(),
+               this->shortest_path_sequence_.end());
 }
 
 void DijkstraShortestPath::print_shortest_path() const {
-  std::cout << "The shortest path from node " << this->temp_start_idx_ << " to " << this->temp_end_idx_ << " is:\n"; 
-  for (int i = 0; i < this->shortest_path_sequence_.size(); i++){
-    std::cout << this->shortest_path_idxs_[i] << "\n";  
+  std::cout << "The shortest path from node " << this->temp_start_idx_ << " to "
+            << this->temp_end_idx_ << " is:\n";
+  for (int i = 0; i < this->shortest_path_sequence_.size(); i++) {
+    std::cout << this->shortest_path_idxs_[i] << "\n";
   }
-  std::cout << "With the overall costs of " << this->shortest_path_cost_ << "\n"; 
+  std::cout << "With the overall costs of " << this->shortest_path_cost_
+            << "\n";
 }
 
 std::vector<int> DijkstraShortestPath::get_shortest_path_idxs() const {
-  return this->shortest_path_idxs_; 
+  return this->shortest_path_idxs_;
 }

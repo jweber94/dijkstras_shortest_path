@@ -6,12 +6,13 @@ RUN apt-get update && \
     git cmake build-essential \
     python3-pip tmux \
     clang-tidy eog \
-    libboost-all-dev
+    libboost-all-dev \ 
+    wget
 
 WORKDIR /dijkstra_dir
 
 # install yaml-cpp
-RUN git clone https://github.com/jweber94/dijkstras_shortest_path.git
+RUN git clone https://github.com/jbeder/yaml-cpp.git
 WORKDIR /dijkstra_dir/yaml-cpp/build
 RUN cmake -DYAML_BUILD_SHARED_LIBS=ON ..
 RUN make -j12
@@ -29,11 +30,10 @@ RUN cmake .. && make install -j12
 #  copy the code from the repo into the container
 WORKDIR /dijkstra_dir/my_code
 COPY . /dijkstra_dir/my_code/
-RUN rm -rf results && mkdir results
 WORKDIR /dijkstra_dir/my_code/build
 RUN rm -rf *
-RUN cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
-RUN make -j12
+#RUN cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+#RUN make -j12
 
 # install the neccessary python packages
 RUN pip3 install numpy && pip3 install matplotlib && pip3 install pep8
