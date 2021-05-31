@@ -6,7 +6,7 @@ After a valid graph is generated, dijkstras algorithm will be applied to it and 
 
 ## CAUTION: Not finished yet! ToDos:
 
-- [ x ] Finalize the Dockerfile and Readme in first version
+- [x] Finalize the Dockerfile and Readme in first version
 - [ ] Find the bug in dijkstras algorithm: Sometimes there is an index error and sometimes a memory access error!
     - Try the algorithm until the error case is generated -> save the graph configuration, hard-code it in the graph constructor class temporarily and debug throu the program
     - Error-Cases: "Something went wrong" (during traversing) & "Segmentation fault" (especially if the graph is very sparse)
