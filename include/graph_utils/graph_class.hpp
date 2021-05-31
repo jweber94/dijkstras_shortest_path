@@ -6,6 +6,7 @@
 #include <Eigen/Dense>
 #include <memory>
 #include <stddef.h>
+#include <vector>
 
 class UndirectedGraph {
 public:

@@ -32,11 +32,11 @@ WORKDIR /dijkstra_dir/my_code
 COPY . /dijkstra_dir/my_code/
 WORKDIR /dijkstra_dir/my_code/build
 RUN rm -rf *
-#RUN cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
-#RUN make -j12
+RUN cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+RUN make -j12
 
 # install the neccessary python packages
 RUN pip3 install numpy && pip3 install matplotlib && pip3 install pep8
 
 # go to the repo-folder in the container
-WORKDIR /complex_number_sequence/my_code
+WORKDIR /dijkstra_dir/my_code
