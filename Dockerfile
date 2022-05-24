@@ -36,7 +36,7 @@ RUN cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
 RUN make -j12
 
 # install the neccessary python packages
-RUN pip3 install numpy && pip3 install matplotlib && pip3 install pep8
+RUN pip3 install numpy && pip3 install matplotlib==3.1.1 && pip3 install pep8
 
 # go to the repo-folder in the container
 WORKDIR /dijkstra_dir/my_code
